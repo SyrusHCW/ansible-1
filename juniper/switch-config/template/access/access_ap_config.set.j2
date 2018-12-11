@@ -18,8 +18,8 @@ set routing-instances VR_GUESTWLAN protocols ospf area 0.0.0.0 interface irb.53 
 set routing-instances VR_GUESTWLAN protocols ospf area 0.0.0.0 interface irb.53 hello-interval 3
 set routing-instances VR_GUESTWLAN protocols ospf area 0.0.0.0 interface irb.53 dead-interval 12
 set routing-instances VR_GUESTWLAN protocols ospf area 0.0.0.0 interface irb.53 authentication md5 1 key {{ item.ospf_md5 }}
-set vlans trust_secure vlan-id 52
-set vlans trust_secure l3-interface irb.52
+set vlans trust_securewlan vlan-id 52
+set vlans trust_securewlan l3-interface irb.52
 set vlans trust_guestwlan vlan-id 53
 set vlans trust_guestwlan l3-interface irb.53
 {% endfor %}
