@@ -5,9 +5,9 @@ set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan me
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_guestwlan
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_mgmt
 set interfaces irb unit 52 description trust_secure
-set interfaces irb unit 52 family inet address {{ item.secure_gw_ip }}
+set interfaces irb unit 52 family inet address {{ item.mgmt_ip }}
 set interfaces irb unit 53 description VR_GUESTWLAN
-set interfaces irb unit 53 family inet address {{ item.guest_gw_ip }}
+set interfaces irb unit 53 family inet address {{ item.mgmt_ip }}
 set protocols ospf area {{ item.ospf_area }} interface irb.52 passive
 set protocols ospf area {{ item.ospf_area }} interface irb.52 hello-interval 3
 set protocols ospf area {{ item.ospf_area }} interface irb.52 dead-interval 12
