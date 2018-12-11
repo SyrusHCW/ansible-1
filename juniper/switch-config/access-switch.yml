@@ -29,11 +29,9 @@
       template: src=template/access-sw/access_ap_config.set.j2 dest={{build_dir}}/access_ap_config.set
       with_items: access_ap_config
       
-      
     - name: Build Access switch VoIP configuration, adds QoS, LLDP, and switch options
       template: src=template/access-sw/access_voice_config.set.j2 dest={{build_dir}}/access_voice_config.set
       with_items: access_voice_config
-      
       
     - name: Build Access switch printer vlan configuration
       template: src=template/access-sw/access_printer_config.set.j2 dest={{build_dir}}/access_printer_config.set
