@@ -1,6 +1,6 @@
 {% for item in access_printer_config %}
 set interfaces irb unit 57 description Printers
-set interfaces irb unit 57 family inet address {{ item.printer_gw_ip }}
+set interfaces irb unit 57 family inet address {{ item.mgmt_ip }}
 set protocols ospf area {{ item.ospf_area }} interface irb.57 passive
 set protocols ospf area {{ item.ospf_area }} interface irb.57 hello-interval 3
 set protocols ospf area {{ item.ospf_area }} interface irb.57 dead-interval 12
