@@ -1,11 +1,11 @@
 --
-- name: Configure Juniper MPLS Switch
+- name: Configure Access Layer Switch
   hosts: 2300c
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
-
+  
   #tasks:
     #- include_vars: "./access-var.yml"
 
