@@ -43,8 +43,8 @@ access_airtame_config:
     ospf_md5: '{{ospf_md5}}'  
       
 airtame_interfaces:
-  - ge-0/0/1
   - ge-0/0/2
+  - ge-0/0/3
   
 access_ap_config:
   - mgmt_ip: '{{mgmt_ip}}'
@@ -52,8 +52,8 @@ access_ap_config:
     ospf_md5: '{{ospf_md5}}'  
       
 ap_interfaces:
-  - ge-0/0/3
   - ge-0/0/4
+  - ge-0/0/5
 
 access_printer_config:
   - mgmt_ip: '{{mgmt_ip}}'
@@ -61,8 +61,8 @@ access_printer_config:
     ospf_md5: '{{ospf_md5}}'  
       
 printer_interfaces:
-  - ge-0/0/5
   - ge-0/0/6
+  - ge-0/0/7
 
 access_voice_config:
   - mgmt_ip: '{{mgmt_ip}}'
