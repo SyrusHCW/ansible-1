@@ -33,7 +33,7 @@ access_mgmt_config:
     ospf_area: '{{ospf_area}}'
     ospf_md5: '{{ospf_md5}}'  
       
-management_interface:
+management_interfaces:
   - ge-0/0/0
   - ge-0/0/47
   
@@ -42,7 +42,7 @@ access_airtame_config:
     ospf_area: '{{ospf_area}}'
     ospf_md5: '{{ospf_md5}}'  
       
-airtame_interface:
+airtame_interfaces:
   - ge-0/0/0
   - ge-0/0/47
   
@@ -51,7 +51,7 @@ access_ap_config:
     ospf_area: '{{ospf_area}}'
     ospf_md5: '{{ospf_md5}}'  
       
-ap_interface:
+ap_interfaces:
   - ge-0/0/0
   - ge-0/0/47
 
@@ -60,7 +60,7 @@ access_printer_config:
     ospf_area: '{{ospf_area}}'
     ospf_md5: '{{ospf_md5}}'  
       
-printer_interface:
+printer_interfaces:
   - ge-0/0/0
   - ge-0/0/47
 
