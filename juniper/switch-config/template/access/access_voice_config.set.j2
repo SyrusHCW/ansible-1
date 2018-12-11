@@ -1,0 +1,39 @@
+{% for item in access_vocie_config %}
+set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
+set interfaces irb unit 51 description trust_voice
+set interfaces irb unit 51 family inet address {{ item.voice_gw_ip }}
+set protocols ospf area {{ item.ospf_area }} interface irb.51 passive
+set protocols ospf area {{ item.ospf_area }} interface irb.51 hello-interval 3
+set protocols ospf area {{ item.ospf_area }} interface irb.51 dead-interval 12
+set protocols ospf area {{ item.ospf_area }} interface irb.51 authentication md5 1 key {{ item.ospf_md5 }}
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.100.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.110.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.112.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.120.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.122.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.130.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.1.132.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.2.110.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.3.110.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.3.120.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.4.110.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.4.120.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.4.130.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.6.65.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.7.17.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.7.20.32/27
+set policy-options prefix-list PL-VOIP-SUBNETS 10.7.33.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS 10.7.36.32/27
+set policy-options prefix-list PL-VOIP-SUBNETS 10.7.100.0/24
+set policy-options prefix-list PL-VOIP-SUBNETS {{ item.voice_cidr }}
+set class-of-service forwarding-classes class CUST-COS-EF queue-num 1
+set class-of-service rewrite-rules dscp RW-DSCP-EF forwarding-class CUST-COS-EF loss-priority low code-point 101110
+set firewall family ethernet-switching filter F-VOIP-EF-ENET term 1 from source-prefix-list PL-VOIP-SUBNETS
+set firewall family ethernet-switching filter F-VOIP-EF-ENET term 1 then forwarding-class CUST-COS-EF
+set firewall family ethernet-switching filter F-VOIP-EF-ENET term 1 then loss-priority low
+set firewall family ethernet-switching filter F-VOIP-EF-ENET term 2 then accept
+set switch-options voip interface TRUST-RANGE vlan voice
+set switch-options voip interface TRUST-RANGE forwarding-class expedited-forwarding
+set vlans trust_voice vlan-id 51
+set vlans trust_voice l3-interface irb.51
+{% endfor %}
