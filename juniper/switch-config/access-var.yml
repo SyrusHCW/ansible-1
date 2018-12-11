@@ -1,0 +1,75 @@
+---
+build_dir: "/tmp/"
+city_code: "MFD"
+mgmt_ip: "192.168.1.10"
+ospf_area: "0.0.0.32
+ospf_md5: "juniper"
+
+agnostic_config:
+  - city_code: '{{city_code}}'
+    closet: 'MDF'
+    type: 'ASW1'
+    timezone: 'EDT'
+    mgmt_ip: '{{mgmt_ip}}'
+    acs_secret: '1234'
+    auth_key: 'qwerty'
+    priv_key: 'asdfgh'
+    address: 'knowhere'
+
+sw_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+
+access_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    mgmt_mask: '/24'
+    mgmt_gw: '192.168.1.254'
+    city_code: '{{city_code}}'
+    trust_ip: '192.1682.1'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'
+
+access_mgmt_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'  
+      
+management_interface
+  - ge-0/0/0
+  - ge-0/0/47
+  
+  
+access_airtame_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'  
+      
+airtame_interface
+  - ge-0/0/0
+  - ge-0/0/47
+  
+access_ap_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'  
+      
+ap_interface
+  - ge-0/0/0
+  - ge-0/0/47
+
+access_printer_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'  
+      
+printer_interface
+  - ge-0/0/0
+  - ge-0/0/47
+
+access_voice_config:
+  - mgmt_ip: '{{mgmt_ip}}'
+    ospf_area: '{{ospf_area}}'
+    ospf_md5: '{{ospf_md5}}'  
+
+phpipam_config:
+  - hostname: '{{city_code}}-MDF-MPLS-SW1'
+    mgmt_ip: '{{mgmt_ip}}'
