@@ -1,4 +1,4 @@
-{% for item in access_vocie_config %}
+{% for item in access_voice_config %}
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces irb unit 51 description trust_voice
 set interfaces irb unit 51 family inet address {{ item.mgmt_ip }}
