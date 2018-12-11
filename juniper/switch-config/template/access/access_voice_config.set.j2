@@ -1,7 +1,7 @@
 {% for item in access_vocie_config %}
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching filter input F-VOIP-EF-ENET
 set interfaces irb unit 51 description trust_voice
-set interfaces irb unit 51 family inet address {{ item.voice_gw_ip }}
+set interfaces irb unit 51 family inet address {{ item.mgmt_ip }}
 set protocols ospf area {{ item.ospf_area }} interface irb.51 passive
 set protocols ospf area {{ item.ospf_area }} interface irb.51 hello-interval 3
 set protocols ospf area {{ item.ospf_area }} interface irb.51 dead-interval 12
@@ -25,7 +25,7 @@ set policy-options prefix-list PL-VOIP-SUBNETS 10.7.20.32/27
 set policy-options prefix-list PL-VOIP-SUBNETS 10.7.33.0/24
 set policy-options prefix-list PL-VOIP-SUBNETS 10.7.36.32/27
 set policy-options prefix-list PL-VOIP-SUBNETS 10.7.100.0/24
-set policy-options prefix-list PL-VOIP-SUBNETS {{ item.voice_cidr }}
+set policy-options prefix-list PL-VOIP-SUBNETS #{{ item.voice_cidr }}
 set class-of-service forwarding-classes class CUST-COS-EF queue-num 1
 set class-of-service rewrite-rules dscp RW-DSCP-EF forwarding-class CUST-COS-EF loss-priority low code-point 101110
 set firewall family ethernet-switching filter F-VOIP-EF-ENET term 1 from source-prefix-list PL-VOIP-SUBNETS
