@@ -1,6 +1,6 @@
 {% for item in access_airtame_config %}
 set interfaces irb unit 54 description VR_AIRTAME
-set interfaces irb unit 54 family inet address {{ item.airtame_ip }}
+set interfaces irb unit 54 family inet address {{ item.mgmt_ip }}
 set routing-instances VR_AIRTAME instance-type virtual-router
 set routing-instances VR_AIRTAME interface irb.54
 set routing-instances VR_AIRTAME protocols ospf area {{ item.ospf_area }} interface irb.54 passive
