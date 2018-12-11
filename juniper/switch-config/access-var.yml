@@ -24,7 +24,7 @@ access_config:
     mgmt_mask: '/24'
     mgmt_gw: '192.168.1.254'
     city_code: '{{city_code}}'
-    trust_ip: '192.1682.1'
+    trust_ip: '192.168.2.1'
     ospf_area: '{{ospf_area}}'
     ospf_md5: '{{ospf_md5}}'
 
