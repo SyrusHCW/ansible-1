@@ -1,0 +1,16 @@
+{% for item in access_airtame_config %}
+set interfaces irb unit 54 description VR_AIRTAME
+set interfaces irb unit 54 family inet address {{ item.airtame_ip }}
+set routing-instances VR_AIRTAME instance-type virtual-router
+set routing-instances VR_AIRTAME interface irb.54
+set routing-instances VR_AIRTAME protocols ospf area {{ item.ospf_area }} interface irb.54 passive
+set routing-instances VR_AIRTAME protocols ospf area {{ item.ospf_area }} interface irb.54 hello-interval 3
+set routing-instances VR_AIRTAME protocols ospf area {{ item.ospf_area }} interface irb.54 dead-interval 12
+set routing-instances VR_AIRTAME protocols ospf area {{ item.ospf_area }} interface irb.54 authentication md5 1 key {{ item.ospf_md5 }}
+set vlans trust_airtame vlan-id 54
+set vlans trust_airtame l3-interface irb.54
+{% endfor %}
+{% for interface in airtame_interfaces %}
+delete interfaces interface-range TRUST-RANGE member {{ interface }}
+set interfaces interface-range AIRTAME-RANGE member {{ interface }}
+{% endfor %}
