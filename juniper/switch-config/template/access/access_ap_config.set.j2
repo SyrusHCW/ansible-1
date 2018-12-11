@@ -1,5 +1,4 @@
 {% for item in access_voice_config %}
-set interfaces interface-range AP-RANGE member ge-0/0/47
 set interfaces interface-range AP-RANGE native-vlan-id 55
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching interface-mode trunk
 set interfaces interface-range AP-RANGE unit 0 family ethernet-switching vlan members trust_securewlan
@@ -23,4 +22,8 @@ set vlans trust_secure vlan-id 52
 set vlans trust_secure l3-interface irb.52
 set vlans trust_guestwlan vlan-id 53
 set vlans trust_guestwlan l3-interface irb.53
+{% endfor %}
+{% for interface in ap_interfaces %}
+delete interfaces interface-range TRUST-RANGE member {{ interface }}
+set interfaces interface-range AP-RANGE member {{ interface }}
 {% endfor %}
