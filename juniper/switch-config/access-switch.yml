@@ -6,12 +6,12 @@
   roles:
     - Juniper.junos
 
-  tasks:
-    - include_vars: "./access-var.yml"
+  #tasks:
+    #- include_vars: "./access-var.yml"
 
-    - name: Build JunOS agnostic config template
-      template: src=template/agnostic_config.set.j2 dest={{build_dir}}/agnostic_config.set
-      with_items: agnostic_config
+    #- name: Build JunOS agnostic config template
+    #  template: src=template/agnostic_config.set.j2 dest={{build_dir}}/agnostic_config.set
+    #  with_items: agnostic_config
 
     #- name: Build JunOS EX switch configuration
     #  template: src=template/sw_config.set.j2 dest={{build_dir}}/sw_config.set
