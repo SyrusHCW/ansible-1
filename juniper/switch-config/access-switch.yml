@@ -13,26 +13,44 @@
       template: src=template/agnostic_config.set.j2 dest={{build_dir}}/agnostic_config.set
       with_items: agnostic_config
 
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}jagnostic_config.set overwrite=no timeout=300
+
     - name: Build JunOS EX switch configuration
       template: src=template/sw_config.set.j2 dest={{build_dir}}/sw_config.set
       with_items: junos_ex_config
 
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}sw_config.set overwrite=no timeout=300
+
     - name: Build Access switch configuration
       template: src=template/access/access_config.set.j2 dest={{build_dir}}/access_config.set
       with_items: access_config
-      
+
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}access_config.set overwrite=no timeout=300
+
     - name: Build Access management VRF switch configuration
       template: src=template/access/access_mgmt_config.set.j2 dest={{build_dir}}/access_mgmt_config.set
       with_items: access_mgmt_config
+      
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}access_mgmt_config.set overwrite=no timeout=300
       
     - name: Build Access switch AP configuration for Secure and Guest, requires management VRF
       template: src=template/access/access_ap_config.set.j2 dest={{build_dir}}/access_ap_config.set
       with_items: access_ap_config
       
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}access_ap_config.set overwrite=no timeout=300
+      
     - name: Build Access switch VoIP configuration, adds QoS, LLDP, and switch options
       template: src=template/access/access_voice_config.set.j2 dest={{build_dir}}/access_voice_config.set
       with_items: access_voice_config
-      
+
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}access_voice_config.set overwrite=no timeout=300
+
     - name: Build Access switch printer vlan configuration
       template: src=template/access/access_printer_config.set.j2 dest={{build_dir}}/access_printer_config.set
       with_items: access_printer_config
@@ -41,7 +59,10 @@
     - name: Build Airtame Configuration for access switch configuration
       template: src=template/access/access_airtame_config.set.j2 dest={{build_dir}}/access_airtame_config.set
       with_items: access_airtame_config
-    
+
+    - name: Apply built config
+      junos_install_config: host={{ inventory_hostname }} file={{ build_dir }}access_airtame_config.set overwrite=no timeout=300
+
     #- name: Build phpIPAM address reservation
     #  template: src=template/phpipam_config.j2 dest={{build_dir}}/phpipam_config.text
     #  with_items: phpipam_config
