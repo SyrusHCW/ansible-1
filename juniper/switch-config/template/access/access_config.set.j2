@@ -56,8 +56,6 @@ set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching vlan
 set interfaces interface-range TRUST-RANGE unit 0 family ethernet-switching recovery-timeout 120
 set interfaces irb unit 50 description trust_access
 set interfaces irb unit 50 family inet address {{ item.trust_ip }}
-set interfaces irb unit 55 description VR_MANAGEMENT
-set interfaces irb unit 55 family inet address {{ item.mgmt_ip }}
 set protocols ospf area {{ item.ospf_area }} interface irb.50 link-protection
 set protocols ospf area {{ item.ospf_area }} interface irb.50 metric 2
 set protocols ospf area {{ item.ospf_area }} interface irb.50 hello-interval 3
@@ -80,18 +78,4 @@ set vlans trust_access l3-interface irb.50
 set vlans trust_access forwarding-options dhcp-security arp-inspection
 set poe interface all
 set routing-options nonstop-routing
-set interfaces interface-range MGMT-RANGE unit 0 family ethernet-switching interface-mode access
-set interfaces interface-range MGMT-RANGE unit 0 family ethernet-switching vlan members trust_mgmt
-set vlans trust_mgmt vlan-id 55
-set vlans trust_mgmt l3-interface irb.55
-set routing-instances VR_MGMT instance-type virtual-router
-set routing-instances VR_MGMT interface irb.55
-set routing-instances VR_MGMT protocols ospf area {{ item.ospf_area }} interface irb.55 passive
-set routing-instances VR_MGMT protocols ospf area {{ item.ospf_area }} interface irb.55 hello-interval 3
-set routing-instances VR_MGMT protocols ospf area {{ item.ospf_area }} interface irb.55 dead-interval 12
-set routing-instances VR_MGMT protocols ospf area {{ item.ospf_area }} interface irb.55 authentication md5 1 key {{ item.ospf_md5 }}
-{% endfor %}
-{% for interface in management_interfaces %}
-delete interfaces interface-range TRUST-RANGE member {{ interface }}
-set interfaces interface-range MGMT-RANGE member {{ interface }}
 {% endfor %}
