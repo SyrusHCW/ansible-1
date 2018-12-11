@@ -21,13 +21,13 @@
       template: src=template/access/access_config.set.j2 dest={{build_dir}}/access_config.set
       with_items: access_config
       
-    #- name: Build Access management VRF switch configuration
-    #  template: src=template/access/access_mgmt_config.set.j2 dest={{build_dir}}/access_mgmt_config.set
-    #  with_items: access_mgmt_config
+    - name: Build Access management VRF switch configuration
+      template: src=template/access/access_mgmt_config.set.j2 dest={{build_dir}}/access_mgmt_config.set
+      with_items: access_mgmt_config
       
-    #- name: Build Access switch AP configuration for Secure and Guest, requires management VRF
-    #  template: src=template/access/access_ap_config.set.j2 dest={{build_dir}}/access_ap_config.set
-    #  with_items: access_ap_config
+    - name: Build Access switch AP configuration for Secure and Guest, requires management VRF
+      template: src=template/access/access_ap_config.set.j2 dest={{build_dir}}/access_ap_config.set
+      with_items: access_ap_config
       
     #- name: Build Access switch VoIP configuration, adds QoS, LLDP, and switch options
     #  template: src=template/access/access_voice_config.set.j2 dest={{build_dir}}/access_voice_config.set
